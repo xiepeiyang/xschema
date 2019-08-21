@@ -29,7 +29,11 @@ function _Schema.Parse(define, obj)
     for field, func in pairs(define) do
         if type(func) == 'table' then
             -- process table, recursive...
-            local value, errmsg = _Schema.Parse(func, obj[field])
+            local value = nil
+            if obj ~= nil then
+                value = obj[field]
+            end
+            local value, errmsg = _Schema.Parse(func, value)
             if errmsg ~= _Schema.OK then
                 return nil, errmsg
             end
@@ -128,7 +132,7 @@ function _errmsg(field, obj, msg, arg)
     if obj == nil then
         obj = 'nil'
     end
-    return field .. ': ' .. obj .. ' ' .. msg .. ' ' .. arg
+    return field .. ': ' .. tostring(obj) .. ' ' .. msg .. ' ' .. arg
 end
 
 return _Schema
