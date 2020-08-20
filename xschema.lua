@@ -74,7 +74,7 @@ function _Schema.Boolen(opt)
         if obj == nil then
             return false, _Schema.OK
         end
-        if obj ~= 'true' and obj ~= 'True' and tonumber(obj) ~= 1 then
+        if obj ~= true and obj ~= 'true' and obj ~= 'True' and tonumber(obj) ~= 1 then
             return false, _Schema.OK
         end
         return true, _Schema.OK
